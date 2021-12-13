@@ -1,2 +1,6 @@
 # Roguelike-Tutorial
-Este repositorio contiene el proyecto que se está desarrollando para la serie de tutoriales en YouTube: Cómo hacer un Roguelike en Unity?
+
+<h2> Información</h2>
+
+Hola a todos! Mi nombre es Pablo, y soy el desarrollador del proyecto que está contenido en este repositorio. Este proyecto está
+concebido como un proyecto de aprendizaje que se ha desarrollado en una serie de videos en mi canal de YouTube.
