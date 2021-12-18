@@ -1,9 +1,10 @@
-using Game.Core.Shooting;
+using Game.Characters.Shooting;
+using Game.Managers;
 using UnityEngine;
 
 namespace Game
 {
-    namespace Core
+    namespace Characters
     {
         namespace Player
         {
@@ -12,7 +13,7 @@ namespace Game
                 [SerializeField] private float _moveSpeed;
                 [SerializeField] private float _fireRate;
                 [SerializeField] private Transform _shootPoint;
-                [SerializeField] private GameObject _bulletPrefab;
+                [SerializeField] private BulletPoolManager _bulletPool;
 
                 private float _horizontal;
                 private float _vertical;
@@ -87,7 +88,8 @@ namespace Game
                 private void Shoot()
                 {
                     _shootCounter = _fireRate;
-                    GameObject bullet = Instantiate(_bulletPrefab, _shootPoint.position, _shootPoint.rotation);
+                    GameObject bullet = _bulletPool.RequestBullet();
+                    bullet.transform.position = _shootPoint.position;
                     bullet.GetComponent<Bullet>().SetDir(GetDirToMouse());
                 }
             }

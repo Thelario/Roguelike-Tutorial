@@ -1,8 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Game
 {
-    namespace Core
+    namespace Characters
     {
         namespace Shooting
         {
@@ -30,7 +31,21 @@ namespace Game
 
                 private void OnTriggerEnter2D(Collider2D collision)
                 {
-                    Destroy(gameObject);
+                    DisableBulletInstantly();
+                }
+
+                private void DisableBulletInstantly()
+                {
+                    if (gameObject.activeInHierarchy)
+                        StartCoroutine(Co_DisableBullet(0f));
+                }
+
+                private IEnumerator Co_DisableBullet(float time)
+                {
+                    yield return new WaitForSeconds(time);
+
+                    if (gameObject.activeInHierarchy)
+                        gameObject.SetActive(false);
                 }
 
                 private void Move()

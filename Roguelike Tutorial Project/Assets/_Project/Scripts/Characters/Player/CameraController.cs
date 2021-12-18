@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game
 {
-    namespace Core
+    namespace Characters
     {
         namespace Player
         {
