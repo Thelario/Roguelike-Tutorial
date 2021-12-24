@@ -13,7 +13,8 @@ namespace Game
                 [SerializeField] private float _moveSpeed;
                 [SerializeField] private float _fireRate;
                 [SerializeField] private Transform _shootPoint;
-                [SerializeField] private BulletPoolManager _bulletPool;
+                [SerializeField] private CameraController _cam;
+                [SerializeField] private GameObject _bulletParticles;
 
                 private float _horizontal;
                 private float _vertical;
@@ -88,9 +89,11 @@ namespace Game
                 private void Shoot()
                 {
                     _shootCounter = _fireRate;
-                    GameObject bullet = _bulletPool.RequestBullet();
+                    GameObject bullet = BulletPoolManager.I.RequestBullet();
                     bullet.transform.position = _shootPoint.position;
                     bullet.GetComponent<Bullet>().SetDir(GetDirToMouse());
+                    _cam.AnimateCamera();
+                    Destroy(Instantiate(_bulletParticles, _shootPoint.position, _shootPoint.rotation), 0.5f);
                 }
             }
         }

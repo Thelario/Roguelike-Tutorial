@@ -11,6 +11,9 @@ namespace Game
             {
                 [SerializeField] private float _bulletMoveSpeed;
 
+                [SerializeField] private TrailRenderer _tr;
+                [SerializeField] private GameObject _bulletParticles;
+
                 private Vector2 _dir = Vector2.zero;
                 private Rigidbody2D _rb;
 
@@ -31,6 +34,11 @@ namespace Game
 
                 private void OnTriggerEnter2D(Collider2D collision)
                 {
+                    if (collision.TryGetComponent(out IDamageable damageable))
+                    {
+                        damageable.TakeDamage(1);
+                    }
+
                     DisableBulletInstantly();
                 }
 
@@ -43,6 +51,8 @@ namespace Game
                 private IEnumerator Co_DisableBullet(float time)
                 {
                     yield return new WaitForSeconds(time);
+                    _tr.Clear();
+                    Destroy(Instantiate(_bulletParticles, transform.position, transform.rotation), 0.5f);
 
                     if (gameObject.activeInHierarchy)
                         gameObject.SetActive(false);

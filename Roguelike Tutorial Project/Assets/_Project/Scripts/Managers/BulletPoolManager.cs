@@ -5,7 +5,7 @@ namespace Game
 {
     namespace Managers
     {
-        public class BulletPoolManager : MonoBehaviour
+        public class BulletPoolManager : Singleton<BulletPoolManager>
         {
             [SerializeField] private int _initialNumberOfBullets;
             [SerializeField] private Transform _bulletsParent;
