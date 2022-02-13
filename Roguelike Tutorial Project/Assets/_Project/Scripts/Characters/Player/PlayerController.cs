@@ -56,6 +56,9 @@ namespace Game
 
                 private void ChangePlayerVelocity()
                 {
+                    if (_horizontal != 0f || _vertical != 0f)
+                        SoundManager.I.PlaySound(SoundType.playerWalk);
+
                     _rb.velocity = new Vector2(_horizontal, _vertical) * Time.fixedDeltaTime * _moveSpeed;
                 }
 
@@ -93,6 +96,7 @@ namespace Game
                     bullet.transform.position = _shootPoint.position;
                     bullet.GetComponent<Bullet>().SetDir(GetDirToMouse());
                     _cam.AnimateCamera();
+                    SoundManager.I.PlaySound(SoundType.playerShoot);
                     Destroy(Instantiate(_bulletParticles, _shootPoint.position, _shootPoint.rotation), 0.5f);
                 }
             }

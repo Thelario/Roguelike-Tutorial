@@ -1,6 +1,7 @@
 using UnityEngine;
 using Game.Characters.Shooting;
 using Game.Animations;
+using Game.Managers;
 
 namespace Game
 {
@@ -17,6 +18,7 @@ namespace Game
 
                 public void TakeDamage(int damage)
                 {
+                    SoundManager.I.PlaySound(SoundType.enemyHit);
                     _health -= damage;
                     if (_health <= 0)
                         Die();
